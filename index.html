@@ -230,6 +230,49 @@ td.mn{font-family:var(--mo);font-size:10px}
 .cr-box{background:var(--w);border:1.5px solid var(--bd);border-radius:7px;padding:9px;text-align:center}
 .cr-val{font-family:var(--mo);font-size:13px;font-weight:500;margin-bottom:2px}
 .cr-lbl{font-size:8px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.3px}
+/* Energy audit probing */
+.ae-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:4px}
+.ae-h{background:var(--w);border:1.5px solid var(--bd);border-radius:var(--rl2);padding:14px;border-left:3px solid #7c3aed;box-shadow:var(--sh)}
+.ae-h .v{font-family:var(--mo);font-size:18px;font-weight:500;color:#6b21a8;margin-bottom:3px}
+.ae-h .l{font-size:10px;font-weight:700;color:var(--t3)}
+.ae-h .s{font-size:9px;font-weight:700;color:#7c3aed;margin-top:4px}
+.ae-leg{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:8px;padding:10px 12px;font-size:10px;color:#6b21a8;line-height:1.6}
+.ae-leg b{color:#581c87}
+.ae-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.ae-card{background:var(--w);border:1.5px solid var(--bd);border-radius:var(--rl2);padding:14px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.ae-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7c3aed,#a855f7)}
+.ae-card.crit::before{background:linear-gradient(90deg,#dc2626,#7c3aed)}
+.ae-card:hover{border-color:#c4b5fd;box-shadow:var(--sh2);transform:translateY(-2px)}
+.ae-c-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:8px}
+.ae-c-nm{font-size:12px;font-weight:800;line-height:1.3;flex:1}
+.ae-c-dev{font-family:var(--mo);font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;background:#f3e8ff;color:#6b21a8;white-space:nowrap}
+.ae-c-dev.crit{background:#fee2e2;color:#991b1b}
+.ae-c-loc{font-size:10px;color:var(--t3);margin-bottom:8px}
+.ae-c-loc .up3n{font-weight:700;color:var(--bl)}
+.ae-bench-row{background:var(--gl2);border-radius:7px;padding:8px 10px;margin-bottom:8px}
+.ae-bench-lbl{font-size:9px;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-bottom:5px;display:flex;justify-content:space-between}
+.ae-bench-lbl b{color:#6b21a8;font-weight:800}
+.ae-bench-bar{position:relative;height:14px;background:var(--w);border-radius:4px;overflow:hidden;border:1px solid var(--bd)}
+.ae-bench-bar .me{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,#7c3aed,#a855f7);border-radius:3px}
+.ae-bench-bar .med{position:absolute;top:-2px;bottom:-2px;width:2px;background:#0ea572}
+.ae-bench-meta{display:flex;justify-content:space-between;font-family:var(--mo);font-size:10px;font-weight:600;color:var(--t2);margin-top:5px}
+.ae-bench-meta .me-v{color:#6b21a8;font-weight:700}
+.ae-bench-meta .med-v{color:#0ea572;font-weight:700}
+.ae-metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.ae-m{background:var(--gl2);border-radius:7px;padding:7px 9px}
+.ae-m.save{background:#ecfdf5;border:1px solid #6ee7b7}
+.ae-m .ml{font-size:9px;color:var(--t3);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
+.ae-m .mv{font-family:var(--mo);font-size:12px;font-weight:500}
+.ae-m.save .mv{color:#047857;font-weight:700}
+.ae-foot{display:flex;gap:5px;border-top:1px solid var(--bd);padding-top:8px}
+.ae-foot .cb{flex:1}
+.ae-empty{grid-column:1/-1;text-align:center;padding:50px;color:var(--t3);background:var(--w);border:1.5px solid var(--bd);border-radius:var(--rl2)}
+.ae-bg-hd{font-size:12px;font-weight:800;margin:8px 0 4px;display:flex;align-items:center;gap:6px;color:#6b21a8}
+.ae-peer-table{background:var(--w);border:1.5px solid var(--bd);border-radius:var(--rl2);overflow:hidden;box-shadow:var(--sh)}
+.ae-peer-table table{font-size:11px}
+.ae-peer-table th{background:#faf5ff;color:#6b21a8}
+.ibox.aud{background:#faf5ff;border-color:#d8b4fe}
+.ibox.aud .ival{color:#6b21a8}
 </style>
 </head>
 <body>
@@ -245,6 +288,7 @@ td.mn{font-family:var(--mo);font-size:10px}
     <div class="hs"><div class="hv bl" id="hs-tot">3039</div><div class="hl">Leads</div></div>
     <div class="hs"><div class="hv re" id="hs-urg">48</div><div class="hl">URGENT</div></div>
     <div class="hs"><div class="hv or" id="hs-c3">1604</div><div class="hl">🔴 3 Bulan</div></div>
+    <div class="hs"><div class="hv" id="hs-audit" style="color:#7c3aed">0</div><div class="hl">🔋 Audit</div></div>
     <div class="hs"><div class="hv gr" id="hs-deal">0</div><div class="hl">Deals ✅</div></div>
   </div>
   <div class="hright">
@@ -258,6 +302,7 @@ td.mn{font-family:var(--mo);font-size:10px}
   <div class="tab" data-tab="t" onclick="switchTab('t',this)">📋 Tabel</div>
   <div class="tab" data-tab="a" onclick="switchTab('a',this)">📊 Analisis</div>
   <div class="tab" data-tab="s" onclick="switchTab('s',this)">📈 Statistik</div>
+  <div class="tab" data-tab="ae" onclick="switchTab('ae',this)">🔋 Audit Energi</div>
 </div>
 <div class="toolbar">
   <div class="sbox"><input id="si" type="text" placeholder="Cari nama, ID, UP3, ULP..." oninput="applyF()"></div>
@@ -297,6 +342,7 @@ td.mn{font-family:var(--mo);font-size:10px}
     <option value="roi">⚡ ROI Tercepat</option>
     <option value="denda">💰 Denda Terbesar</option>
     <option value="rasio">📊 Rasio Tertinggi</option>
+    <option value="audit">🔋 Potensi Audit Energi</option>
   </select>
   <button class="fb" onclick="resetF()" style="color:var(--rd);border-color:var(--rm)">✕</button>
   <span class="fcnt" id="fcnt"></span>
@@ -331,6 +377,7 @@ td.mn{font-family:var(--mo);font-size:10px}
 </div>
 <div id="va" style="display:none;padding:16px 20px;flex-direction:column;gap:14px"></div>
 <div id="vs" style="display:none;padding:16px 20px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px"></div>
+<div id="vae" style="display:none;padding:16px 20px;flex-direction:column;gap:14px"></div>
 <div class="ov" id="ov" onclick="if(event.target===this)closeM()">
   <div class="modal">
     <div class="mh"><div><div class="mt" id="mtit"></div><div class="ms" id="msub"></div></div><button class="mc" onclick="closeM()">✕</button></div>
@@ -425,6 +472,10 @@ function getS(arr){
       return ra!==rb?ra-rb:b.denda_avg-a.denda_avg;
     }
     if(mode==='rasio') return b.rasio-a.rasio;
+    if(mode==='audit'){
+      var sa=eaScoreOf(a), sb=eaScoreOf(b);
+      return sb-sa;
+    }
     var po={URGENT:0,HIGH:1,MEDIUM:2,LOW:3};
     var pa=po[a.priority]||3, pb2=po[b.priority]||3;
     return pa!==pb2?pa-pb2:b.denda_avg-a.denda_avg;
@@ -460,6 +511,7 @@ function applyF(){
   else if(tab==='b')renderB();
   else if(tab==='t')renderT();
   else if(tab==='a')renderA();
+  else if(tab==='ae')renderAE();
   else renderS();
 }
 function resetF(){
@@ -473,13 +525,14 @@ function switchTab(t,el){
   document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
   el.classList.add('active');
   el.dataset.tab=t;
-  ['vk','vb','vt','va','vs'].forEach(function(id){document.getElementById(id).style.display='none'});
-  var disp={k:'grid',b:'flex',t:'block',a:'flex',s:'grid'};
+  ['vk','vb','vt','va','vs','vae'].forEach(function(id){document.getElementById(id).style.display='none'});
+  var disp={k:'grid',b:'flex',t:'block',a:'flex',s:'grid',ae:'flex'};
   document.getElementById('v'+t).style.display=disp[t];
   if(t==='k')renderK();
   else if(t==='b')renderB();
   else if(t==='t')renderT();
   else if(t==='a')renderA();
+  else if(t==='ae')renderAE();
   else renderS();
 }
 
@@ -789,11 +842,218 @@ function renderS(){
     +'<div class="sc wide"><div style="font-size:12px;font-weight:800;margin-bottom:12px">🗂 Pipeline</div>'+rows+'</div>';
 }
 
+/* ── ENERGY AUDIT PROBING ───────────────────────────────────── */
+function eaBracket(va){
+  if(!va)return 'N/A';
+  if(va<200000)return '<200 kVA';
+  if(va<555000)return '200–555 kVA';
+  if(va<1000000)return '555–1000 kVA';
+  if(va<2500000)return '1–2.5 MVA';
+  if(va<5000000)return '2.5–5 MVA';
+  if(va<10000000)return '5–10 MVA';
+  return '>10 MVA';
+}
+function eaPeerKey(l){return (l.tarif||'?')+'|'+eaBracket(l.daya_va)}
+function eaTariffKwh(t){
+  return ({I3:1115,I2:1445,B3:1150,B2:1445,P2:1500,S2:1200,S2K:1200})[t]||1300;
+}
+function eaMedian(arr){
+  if(!arr.length)return 0;
+  var s=arr.slice().sort(function(a,b){return a-b});
+  var m=Math.floor(s.length/2);
+  return s.length%2?s[m]:(s[m-1]+s[m])/2;
+}
+var EA_BENCH=null,EA_DIRTY=true;
+function eaInvalidate(){EA_DIRTY=true;EA_BENCH=null}
+function eaBuildBench(){
+  if(EA_BENCH&&!EA_DIRTY)return EA_BENCH;
+  EA_BENCH={};
+  var grp={};
+  leads.forEach(function(l){
+    if(!l.jam_nyala||l.jam_nyala<=0||!l.daya_va)return;
+    var k=eaPeerKey(l);
+    (grp[k]=grp[k]||[]).push(l.jam_nyala);
+  });
+  Object.keys(grp).forEach(function(k){
+    var arr=grp[k];
+    EA_BENCH[k]={n:arr.length,median:eaMedian(arr),max:Math.max.apply(null,arr),avg:arr.reduce(function(s,v){return s+v},0)/arr.length};
+  });
+  EA_DIRTY=false;
+  return EA_BENCH;
+}
+function eaScoreOf(l){
+  if(!l||!l.jam_nyala||l.jam_nyala<=0||!l.daya_va)return 0;
+  var b=eaBuildBench()[eaPeerKey(l)];
+  if(!b||b.n<3||b.median<=0)return 0;
+  if(l.jam_nyala<=b.median)return 0;
+  var excessJam=l.jam_nyala-b.median;
+  var excessKwh=excessJam*(l.daya_va/1000);
+  return excessKwh*eaTariffKwh(l.tarif)*12;
+}
+function eaInfo(l){
+  if(!l||!l.jam_nyala||l.jam_nyala<=0||!l.daya_va)return null;
+  var b=eaBuildBench()[eaPeerKey(l)];
+  if(!b||b.n<3||b.median<=0)return null;
+  var dev=(l.jam_nyala-b.median)/b.median*100;
+  var dayaKva=l.daya_va/1000;
+  var excessJam=Math.max(0,l.jam_nyala-b.median);
+  var excessKwh=excessJam*dayaKva;
+  var tariff=eaTariffKwh(l.tarif);
+  var saveMon=excessKwh*tariff;
+  return {bench:b,dev:dev,bracket:eaBracket(l.daya_va),dayaKva:dayaKva,
+    excessJam:excessJam,excessKwh:excessKwh,tariff:tariff,
+    saveMonth:saveMon,saveYear:saveMon*12};
+}
+function eaCandidates(arr){
+  eaBuildBench();
+  var out=[];
+  arr.forEach(function(l){
+    var info=eaInfo(l);
+    if(!info)return;
+    if(info.dev<=20)return;
+    out.push(Object.assign({l:l},info));
+  });
+  return out.sort(function(a,b){return b.saveYear-a.saveYear});
+}
+function devClass(d){return d>=100?'crit':''}
+function fkva2(va){if(!va)return'—';if(va>=1e6)return(va/1e6).toFixed(1)+' MVA';if(va>=1e3)return(va/1e3).toFixed(0)+' kVA';return va+' VA'}
+function fnum(n){return n>=1e6?(n/1e6).toFixed(2)+' jt':n>=1e3?(n/1e3).toFixed(1)+' rb':Math.round(n).toLocaleString('id-ID')}
+
+function eaModalSection(l){
+  var info=eaInfo(l);
+  if(!l||!l.jam_nyala||!l.daya_va){
+    return '<div class="shd">🔋 Probing Audit Energi</div>'
+      +'<div class="ibox" style="background:#f8fafc"><div style="font-size:11px;color:var(--t3)">Data jam nyala / daya tidak tersedia untuk pelanggan ini.</div></div>';
+  }
+  if(!info){
+    return '<div class="shd">🔋 Probing Audit Energi</div>'
+      +'<div class="ibox" style="background:#f8fafc"><div style="font-size:11px;color:var(--t3)">Peer group <b>'+l.tarif+' '+eaBracket(l.daya_va)+'</b> belum punya cukup sampel (&lt;3) untuk benchmark.</div>'
+      +'<div style="font-size:10px;color:var(--t3);margin-top:4px;font-family:var(--mo)">Jam nyala pelanggan: '+l.jam_nyala.toFixed(1)+' jam · Daya: '+fkva2(l.daya_va)+'</div></div>';
+  }
+  var b=info.bench;
+  var devCls=info.dev>=100?'wn':info.dev>=50?'wn':'aud';
+  var devLbl=(info.dev>=0?'+':'')+info.dev.toFixed(0)+'%';
+  var status=info.dev>=100?'⚠️ <b>KRITIKAL</b> — jam nyala &gt;2× peer median, indikasi kuat untuk audit energi':
+             info.dev>=50?'🟠 <b>TINGGI</b> — jam nyala signifikan di atas peer, audit direkomendasikan':
+             info.dev>=20?'🔵 <b>MODERAT</b> — di atas median peer, layak ditelaah lebih lanjut':
+             info.dev>=-20?'✅ <b>NORMAL</b> — sejajar dengan peer median':
+             '🟢 <b>EFISIEN</b> — jam nyala di bawah peer median';
+  var maxBar=Math.max(l.jam_nyala,b.max,b.median*2);
+  var pctMe=Math.min(100,l.jam_nyala/maxBar*100);
+  var pctMed=Math.min(100,b.median/maxBar*100);
+  return '<div class="shd">🔋 Probing Audit Energi</div>'
+    +'<div style="background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:8px;padding:14px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'
+        +'<div style="font-size:11px;font-weight:800;color:#6b21a8;text-transform:uppercase;letter-spacing:.5px">Jam Nyala vs Peer Group</div>'
+        +'<div class="ae-c-dev '+(info.dev>=100?'crit':'')+'" style="font-size:12px">'+devLbl+'</div>'
+      +'</div>'
+      +'<div style="font-size:10px;color:var(--t2);margin-bottom:8px">Peer: <b>'+l.tarif+' '+info.bracket+'</b> · '+b.n+' pelanggan · median '+b.median.toFixed(1)+' jam</div>'
+      +'<div class="ae-bench-bar" style="height:18px"><div class="me" style="width:'+pctMe+'%"></div><div class="med" style="left:'+pctMed+'%"></div></div>'
+      +'<div class="ae-bench-meta">'
+        +'<span class="me-v">▮ Pelanggan: '+l.jam_nyala.toFixed(1)+' jam</span>'
+        +'<span class="med-v">┃ Median: '+b.median.toFixed(1)+' jam · Maks: '+b.max.toFixed(1)+' jam</span>'
+      +'</div>'
+      +'<div style="font-size:11px;color:var(--t2);margin:10px 0 8px;line-height:1.5">'+status+'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">'
+        +'<div class="ibox '+devCls+'"><div class="ilbl">Excess Jam Nyala</div><div class="ival">'+info.excessJam.toFixed(1)+' jam/bln</div></div>'
+        +'<div class="ibox '+devCls+'"><div class="ilbl">Excess kWh Estimasi</div><div class="ival">'+fnum(info.excessKwh)+' kWh/bln</div></div>'
+        +'<div class="ibox hl"><div class="ilbl">💚 Potensi Hemat/bln</div><div class="ival g">'+f(info.saveMonth)+'</div></div>'
+        +'<div class="ibox hl"><div class="ilbl">💚 Potensi Hemat/tahun</div><div class="ival g">'+f(info.saveYear)+'</div><div style="font-size:9px;color:var(--t3);margin-top:3px">@ Rp '+info.tariff.toLocaleString('id-ID')+'/kWh ('+l.tarif+')</div></div>'
+      +'</div>'
+      +'<div style="font-size:9px;color:#6b21a8;line-height:1.6;background:#fff;border-radius:6px;padding:8px;border:1px dashed #c4b5fd">💡 <b>Cara hitung</b>: jam nyala efektif = kWh ÷ kVA. Excess = (jam pelanggan − median peer). Excess kWh = excess jam × kVA. Hemat tahunan = excess kWh × tarif kWh × 12. <b>Catatan</b>: angka ini adalah potensi maksimum bila konsumsi diselaraskan ke median peer; realisasi audit umumnya 10–30% dari angka ini.</div>'
+    +'</div>';
+}
+
+function renderAE(){
+  eaBuildBench();
+  var el=document.getElementById('vae');
+  var cands=eaCandidates(filt);
+  var totSaveYr=cands.reduce(function(s,c){return s+c.saveYear},0);
+  var totKwh=cands.reduce(function(s,c){return s+c.excessKwh},0);
+  var crit=cands.filter(function(c){return c.dev>=100}).length;
+  var hi=cands.filter(function(c){return c.dev>=50&&c.dev<100}).length;
+  var md=cands.filter(function(c){return c.dev>20&&c.dev<50}).length;
+  var pgCount=Object.keys(EA_BENCH).filter(function(k){return EA_BENCH[k].n>=3}).length;
+  var hero=
+    '<div class="ae-hero">'
+      +'<div class="ae-h"><div class="v">'+cands.length.toLocaleString()+'</div><div class="l">Kandidat Audit Energi</div><div class="s">jam nyala &gt; +20% peer median</div></div>'
+      +'<div class="ae-h"><div class="v">'+f(totSaveYr)+'</div><div class="l">Potensi Penghematan/tahun</div><div class="s">Maks. jika align ke median peer</div></div>'
+      +'<div class="ae-h"><div class="v">'+fnum(totKwh)+' kWh</div><div class="l">Excess kWh/bulan</div><div class="s">vs benchmark peer</div></div>'
+      +'<div class="ae-h"><div class="v" style="color:#dc2626">'+crit.toLocaleString()+'</div><div class="l">⚠️ Kritikal (&gt;100%)</div><div class="s">'+hi+' tinggi · '+md+' moderat</div></div>'
+      +'<div class="ae-h"><div class="v">'+pgCount+'</div><div class="l">Peer Group Aktif</div><div class="s">≥3 anggota / tarif × kelas daya</div></div>'
+    +'</div>'
+    +'<div class="ae-leg">🔋 <b>Probing Audit Energi</b> — kandidat = pelanggan dengan <b>jam nyala efektif</b> (kWh ÷ kVA daya) yang menonjol di atas median <b>peer group</b> (sesuai tarif &amp; kelas daya). Excess jam × daya × tarif kWh = <b>potensi penghematan</b> bila konsumsi diselaraskan ke peer median. Komplemen probing kVAR (cosφ) — fokus di sisi <b>energi aktif (kWh)</b>.</div>';
+
+  if(!cands.length){
+    el.innerHTML=hero+'<div class="ae-empty"><div style="font-size:40px;margin-bottom:10px">🔋</div><div style="font-weight:800;color:var(--t2);margin-bottom:4px">Tidak ada kandidat audit energi</div><div style="font-size:11px">Tidak ada pelanggan dalam filter saat ini yang jam nyalanya signifikan di atas peer (≥+20%).</div></div>';
+    return;
+  }
+
+  // Build cards
+  var cards=cands.slice(0,120).map(function(c,i){
+    var l=c.l, b=c.bench;
+    var devCls=devClass(c.dev);
+    var maxBar=Math.max(l.jam_nyala,b.max,b.median*2);
+    var pctMe=Math.min(100,l.jam_nyala/maxBar*100);
+    var pctMed=Math.min(100,b.median/maxBar*100);
+    var devLbl=(c.dev>=0?'+':'')+c.dev.toFixed(0)+'%';
+    return '<div class="ae-card '+devCls+'" onclick="openL(\''+l.id+'\')">'
+      +'<div class="ae-c-top">'
+        +'<div class="ae-c-nm">#'+(i+1)+' · '+(l.nama||'—')+'</div>'
+        +'<div class="ae-c-dev '+devCls+'">'+devLbl+'</div>'
+      +'</div>'
+      +'<div class="ae-c-loc">'
+        +'<div class="up3n">🏢 '+l.up3_code+' — '+l.up3+'</div>'
+        +'<div>📍 '+l.ulp_num+' — '+l.ulp+' · <span class="badge tf" style="font-size:9px;padding:1px 5px">'+l.tarif+'</span> · '+fkva2(l.daya_va)+'</div>'
+      +'</div>'
+      +'<div class="ae-bench-row">'
+        +'<div class="ae-bench-lbl"><span>🕐 Jam Nyala vs Peer (<b>'+l.tarif+' '+c.bracket+'</b> · n='+b.n+')</span></div>'
+        +'<div class="ae-bench-bar"><div class="me" style="width:'+pctMe+'%"></div><div class="med" style="left:'+pctMed+'%"></div></div>'
+        +'<div class="ae-bench-meta">'
+          +'<span class="me-v">▮ Pelanggan: '+l.jam_nyala.toFixed(1)+' jam</span>'
+          +'<span class="med-v">┃ Peer median: '+b.median.toFixed(1)+' jam</span>'
+        +'</div>'
+      +'</div>'
+      +'<div class="ae-metrics">'
+        +'<div class="ae-m"><div class="ml">Excess kWh/bln</div><div class="mv">'+fnum(c.excessKwh)+' kWh</div></div>'
+        +'<div class="ae-m"><div class="ml">Tarif kWh ('+l.tarif+')</div><div class="mv">Rp '+c.tariff.toLocaleString('id-ID')+'</div></div>'
+        +'<div class="ae-m save"><div class="ml">💚 Potensi Hemat/bln</div><div class="mv">'+f(c.saveMonth)+'</div></div>'
+        +'<div class="ae-m save"><div class="ml">💚 Potensi Hemat/tahun</div><div class="mv">'+f(c.saveYear)+'</div></div>'
+      +'</div>'
+      +'<div class="ae-foot">'
+        +'<div class="cb" onclick="event.stopPropagation();qmove(\''+l.id+'\')">→ Maju Stage</div>'
+        +'<div class="cb pr" onclick="event.stopPropagation();openL(\''+l.id+'\')">🔍 Probing</div>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+
+  // Peer group benchmark table
+  var bg={};
+  cands.forEach(function(c){
+    var k=eaPeerKey(c.l);
+    if(!bg[k])bg[k]={tarif:c.l.tarif,bracket:c.bracket,n:c.bench.n,median:c.bench.median,cnt:0,save:0};
+    bg[k].cnt++; bg[k].save+=c.saveYear;
+  });
+  var bgRows=Object.keys(bg).sort(function(a,b){return bg[b].save-bg[a].save}).slice(0,12).map(function(k){
+    var g=bg[k];
+    return '<tr><td><span class="badge tf">'+g.tarif+'</span></td><td>'+g.bracket+'</td><td class="mn">'+g.n+'</td><td class="mn" style="color:#0ea572;font-weight:700">'+g.median.toFixed(1)+' jam</td><td class="mn" style="color:#7c3aed;font-weight:700">'+g.cnt+'</td><td class="dn" style="color:#047857">'+f(g.save)+'</td></tr>';
+  }).join('');
+
+  el.innerHTML=hero
+    +'<div class="ae-bg-hd">📋 Top Kandidat Audit Energi <span style="font-weight:600;color:var(--t3);font-size:10px">('+Math.min(cands.length,120)+' dari '+cands.length+' · sort: potensi hemat tahunan)</span></div>'
+    +'<div class="ae-grid">'+cards+'</div>'
+    +'<div class="ae-bg-hd">📊 Peer Group dengan Potensi Hemat Terbesar</div>'
+    +'<div class="ae-peer-table"><table><thead><tr><th>Tarif</th><th>Kelas Daya</th><th>n Peer</th><th>Median Jam Nyala</th><th>Kandidat</th><th>Total Hemat/thn</th></tr></thead><tbody>'+bgRows+'</tbody></table></div>';
+}
+
 function updateHS(){
   document.getElementById('hs-tot').textContent=leads.length.toLocaleString();
   document.getElementById('hs-urg').textContent=leads.filter(function(l){return l.priority==='URGENT'}).length;
   document.getElementById('hs-c3').textContent=leads.filter(function(l){return l.is_c3}).length;
   document.getElementById('hs-deal').textContent=leads.filter(function(l){return l.stage==='deal'}).length;
+  var ac=eaCandidates(leads).length;
+  var elA=document.getElementById('hs-audit');
+  if(elA)elA.textContent=ac.toLocaleString();
 }
 
 /* ── MODAL ──────────────────────────────────────────────────── */
@@ -842,6 +1102,7 @@ function openL(id){
       +'<div class="ibox"><div class="ilbl">📍 ULP / Gardu</div><div style="font-size:11px;font-weight:700;color:var(--t2)">'+l.ulp_num+' — '+l.ulp+'</div><div style="font-size:10px;color:var(--t3);margin-top:2px">'+(l.gardu||'—')+'</div></div>'
       +'<div class="ibox full"><div class="ilbl">📍 Alamat</div><div style="font-size:11px;color:var(--t2);margin-top:2px">'+(l.alamat||'—')+'</div></div>'
     +'</div>'
+    +eaModalSection(l)
     +'<div class="shd">🧮 Kalkulator Kapasitor Bank</div>'
     +'<div style="background:#fffbeb;border:1.5px solid #fcd34d;border-radius:8px;padding:14px">'
       +'<div style="font-size:11px;font-weight:800;color:#92400e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">⚡ Estimasi Kebutuhan & Biaya Kapasitor</div>'
