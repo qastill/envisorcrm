@@ -365,6 +365,13 @@ td.mn{font-family:var(--mo);font-size:10px}
     <option value="2">🟡 2 Bulan</option>
     <option value="1">⚪ 1 Bulan Saja</option>
   </select>
+  <select class="fb" id="fr" onchange="applyF()" title="Rasio denda kVArh terhadap tagihan">
+    <option value="">Semua Rasio</option>
+    <option value="50">📊 ≥ 50% (sangat signifikan)</option>
+    <option value="30">📊 30–50% (signifikan)</option>
+    <option value="10">📊 10–30% (material)</option>
+    <option value="lo">📊 &lt; 10% (kecil)</option>
+  </select>
   <select class="fb" id="fst" onchange="applyF()">
     <option value="">Semua Stage</option>
     <option value="prospek">🎯 Prospek</option><option value="kontak">📞 Kontak</option>
@@ -528,6 +535,7 @@ function applyF(){
   var fl=parseInt(document.getElementById('fulp').value||'0')||0;
   var ft=document.getElementById('fut').value;
   var fch=document.getElementById('fch').value;
+  var fr=document.getElementById('fr').value;
   var fs=document.getElementById('fst').value;
   filt=leads.filter(function(l){
     if(q&&!(l.nama.toLowerCase().includes(q)||(l.id+'').includes(q)||l.up3.toLowerCase().includes(q)||(l.ulp||'').toLowerCase().includes(q)))return false;
@@ -538,6 +546,10 @@ function applyF(){
     if(fch==='3'&&!l.is_c3)return false;
     if(fch==='2'&&!(l.is_c2&&!l.is_c3))return false;
     if(fch==='1'&&l.months!==1)return false;
+    if(fr==='50'&&!(l.rasio>=50))return false;
+    if(fr==='30'&&!(l.rasio>=30&&l.rasio<50))return false;
+    if(fr==='10'&&!(l.rasio>=10&&l.rasio<30))return false;
+    if(fr==='lo'&&!(l.rasio<10))return false;
     if(fs&&l.stage!==fs)return false;
     return true;
   });
@@ -555,7 +567,7 @@ function applyF(){
 }
 function resetF(){
   document.getElementById('si').value='';
-  ['fp','fup3','fulp','fut','fch','fst'].forEach(function(id){document.getElementById(id).value=''});
+  ['fp','fup3','fulp','fut','fch','fr','fst'].forEach(function(id){document.getElementById(id).value=''});
   document.getElementById('fsort').value='smart';
   populateUlp('');
   applyF();
@@ -627,6 +639,7 @@ function updateChips(){
   var fl=document.getElementById('fulp').value;
   var ft=document.getElementById('fut').value;
   var fch=document.getElementById('fch').value;
+  var fr=document.getElementById('fr').value;
   var fs=document.getElementById('fst').value;
   if(q)chips.push({label:'🔍 "'+q+'"',clr:function(){document.getElementById('si').value='';applyF()}});
   if(fp)chips.push({label:'⚡ '+fp,clr:function(){document.getElementById('fp').value='';applyF()}});
@@ -635,6 +648,8 @@ function updateChips(){
   if(ft)chips.push({label:'Tarif '+ft,clr:function(){document.getElementById('fut').value='';applyF()}});
   var fm={'3':'3 Bulan','2':'2 Bulan','1':'1 Bulan'};
   if(fch)chips.push({label:fm[fch]||fch,clr:function(){document.getElementById('fch').value='';applyF()}});
+  var rm={'50':'Rasio ≥50%','30':'Rasio 30–50%','10':'Rasio 10–30%','lo':'Rasio <10%'};
+  if(fr)chips.push({label:'📊 '+(rm[fr]||fr),clr:function(){document.getElementById('fr').value='';applyF()}});
   if(fs)chips.push({label:SL[fs]||fs,clr:function(){document.getElementById('fst').value='';applyF()}});
   if(!chips.length){bar.classList.remove('on');return}
   bar.classList.add('on');
