@@ -273,6 +273,40 @@ td.mn{font-family:var(--mo);font-size:10px}
 .ae-peer-table th{background:#faf5ff;color:#6b21a8}
 .ibox.aud{background:#faf5ff;border-color:#d8b4fe}
 .ibox.aud .ival{color:#6b21a8}
+/* ── Insight Jual tab ─────────────────────────────────────── */
+.ins-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.ih{background:linear-gradient(135deg,#fff,#f8faff);border:1.5px solid var(--bd);border-radius:var(--rl2);padding:14px 16px;position:relative;overflow:hidden}
+.ih::after{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+.ih.g::after{background:var(--gr)}.ih.b::after{background:var(--bl)}.ih.o::after{background:var(--or)}.ih.r::after{background:var(--re)}.ih.p::after{background:#7c3aed}
+.ih-ic{font-size:20px;margin-bottom:6px}
+.ih-v{font-family:var(--mo);font-size:21px;font-weight:600;letter-spacing:-.5px;line-height:1.1}
+.ih-l{font-size:11px;font-weight:700;color:var(--tx);margin-top:3px}
+.ih-s{font-size:10px;color:var(--t3);margin-top:2px;line-height:1.4}
+.ins-sec{background:var(--w);border:1.5px solid var(--bd);border-radius:var(--rl2);padding:16px}
+.ins-h{font-size:13px;font-weight:800;margin-bottom:3px;display:flex;align-items:center;gap:6px}
+.ins-sub{font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.5}
+.ins-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.ins-grid2{grid-template-columns:1fr}}
+.ibar{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.ibar-l{width:118px;font-size:11px;font-weight:700;color:var(--t2);flex-shrink:0;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.ibar-l:hover{color:var(--bl)}
+.ibar-t{flex:1;height:18px;background:var(--gl2);border-radius:5px;overflow:hidden;position:relative}
+.ibar-f{height:100%;border-radius:5px;min-width:2px;transition:width .5s}
+.ibar-v{width:138px;font-family:var(--mo);font-size:11px;font-weight:500;text-align:right;flex-shrink:0;color:var(--t2)}
+.ibar-c{font-size:10px;color:var(--t3);width:48px;text-align:right;flex-shrink:0}
+.tgt{width:100%;border-collapse:collapse;font-size:11px}
+.tgt th{text-align:left;padding:7px 8px;border-bottom:2px solid var(--bd);color:var(--t3);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+.tgt td{padding:7px 8px;border-bottom:1px solid var(--bd)}
+.tgt tr:hover{background:var(--gl2)}
+.tgt .nm{font-weight:700;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tgt .mo2{font-family:var(--mo)}
+.pitchbtn{padding:3px 8px;border-radius:6px;border:1.5px solid var(--bd2);background:var(--w);font-size:10px;font-weight:700;color:var(--bl);cursor:pointer;white-space:nowrap}
+.pitchbtn:hover{background:var(--ll);border-color:var(--bl)}
+.mtrend{display:flex;align-items:flex-end;gap:10px;height:120px;padding:8px 4px 0}
+.mtb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:5px;height:100%}
+.mtb-bar{width:100%;max-width:64px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#3b82f6,#1d4ed8);min-height:4px;transition:height .5s}
+.mtb-v{font-family:var(--mo);font-size:10px;font-weight:600;color:var(--bl)}
+.mtb-l{font-size:11px;font-weight:700;color:var(--t2)}
 </style>
 </head>
 <body>
@@ -301,6 +335,7 @@ td.mn{font-family:var(--mo);font-size:10px}
   <div class="tab" data-tab="b" onclick="switchTab('b',this)">🗂 Kanban</div>
   <div class="tab" data-tab="t" onclick="switchTab('t',this)">📋 Tabel</div>
   <div class="tab" data-tab="a" onclick="switchTab('a',this)">📊 Analisis</div>
+  <div class="tab" data-tab="i" onclick="switchTab('i',this)">💡 Insight Jual</div>
   <div class="tab" data-tab="s" onclick="switchTab('s',this)">📈 Statistik</div>
   <div class="tab" data-tab="ae" onclick="switchTab('ae',this)">🔋 Audit Energi</div>
 </div>
@@ -378,6 +413,7 @@ td.mn{font-family:var(--mo);font-size:10px}
 <div id="va" style="display:none;padding:16px 20px;flex-direction:column;gap:14px"></div>
 <div id="vs" style="display:none;padding:16px 20px;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px"></div>
 <div id="vae" style="display:none;padding:16px 20px;flex-direction:column;gap:14px"></div>
+<div id="vi" style="display:none;padding:16px 20px;flex-direction:column;gap:14px"></div>
 <div class="ov" id="ov" onclick="if(event.target===this)closeM()">
   <div class="modal">
     <div class="mh"><div><div class="mt" id="mtit"></div><div class="ms" id="msub"></div></div><button class="mc" onclick="closeM()">✕</button></div>
@@ -514,6 +550,7 @@ function applyF(){
   else if(tab==='t')renderT();
   else if(tab==='a')renderA();
   else if(tab==='ae')renderAE();
+  else if(tab==='i')renderI();
   else renderS();
 }
 function resetF(){
@@ -527,14 +564,15 @@ function switchTab(t,el){
   document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});
   el.classList.add('active');
   el.dataset.tab=t;
-  ['vk','vb','vt','va','vs','vae'].forEach(function(id){document.getElementById(id).style.display='none'});
-  var disp={k:'grid',b:'flex',t:'block',a:'flex',s:'grid',ae:'flex'};
+  ['vk','vb','vt','va','vs','vae','vi'].forEach(function(id){document.getElementById(id).style.display='none'});
+  var disp={k:'grid',b:'flex',t:'block',a:'flex',s:'grid',ae:'flex',i:'flex'};
   document.getElementById('v'+t).style.display=disp[t];
   if(t==='k')renderK();
   else if(t==='b')renderB();
   else if(t==='t')renderT();
   else if(t==='a')renderA();
   else if(t==='ae')renderAE();
+  else if(t==='i')renderI();
   else renderS();
 }
 
@@ -758,6 +796,137 @@ function renderT(){
 }
 
 function sT(k){if(sK===k)sD*=-1;else{sK=k;sD=1}renderT()}
+
+/* ── INSIGHT JUAL (sales intelligence) ──────────────────────── */
+function pitchText(l){
+  var thn=l.denda_avg*12;
+  return '⚡ '+l.nama+' ('+l.tarif+', '+fd(l.daya_va)+') — '+l.up3+' / '+l.ulp+'\n'
+    +'• Denda kVArh saat ini: ±'+f(l.denda_avg)+'/bulan ('+f(thn)+'/tahun)\n'
+    +'• Pola: '+l.freq+', rasio denda '+l.rasio+'% dari tagihan listrik\n'
+    +'• Solusi ENVISOR: kapasitor bank '+l.kvar_rec+' kVAR, investasi ±'+f(l.invest_est)+'\n'
+    +'• Balik modal ±'+l.roi_bulan+' bulan, setelah itu hemat ±'+f(l.denda_avg)+'/bulan selamanya.';
+}
+function fallbackCopy(t){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Pitch disalin!')}catch(e){toast('Gagal menyalin','❌')}document.body.removeChild(ta);}
+function copyPitch(id){
+  var l=leads.find(function(x){return x.id===id});if(!l)return;
+  var t=pitchText(l);
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){toast('Pitch disalin — siap di-WhatsApp!')},function(){fallbackCopy(t)});}
+  else fallbackCopy(t);
+}
+function insFilter(kind,val){
+  if(kind==='up3'){document.getElementById('fup3').value=val;populateUlp(val);document.getElementById('fulp').value='';}
+  else if(kind==='tarif'){document.getElementById('fut').value=val;}
+  var kt=document.querySelector('.tab[data-tab="k"]');if(kt)switchTab('k',kt);
+  applyF();
+}
+function renderI(){
+  var el=document.getElementById('vi');
+  var A=filt;
+  if(!A.length){el.innerHTML='<div style="padding:48px;text-align:center;color:var(--t3)">Tidak ada data untuk filter ini.</div>';return;}
+  var sum=function(g){return A.reduce(function(s,l){return s+(g(l)||0)},0)};
+  var dBln=sum(function(l){return l.denda_avg});
+  var d3=sum(function(l){return l.denda_jan+l.denda_feb+l.denda_mar});
+  var inv=sum(function(l){return l.invest_est});
+  var kv=sum(function(l){return l.kvar_rec});
+  var fee=dBln*0.1;
+  var qw=A.filter(function(l){return l.roi_bulan<=6});
+  var qwD=qw.reduce(function(s,l){return s+l.denda_avg},0);
+  var c3=A.filter(function(l){return l.is_c3}).length;
+  var ms=META.months_short||['M1','M2','M3'];
+  var t1=sum(function(l){return l.denda_jan}),t2=sum(function(l){return l.denda_feb}),t3=sum(function(l){return l.denda_mar});
+  var grow=t1>0?((t3-t1)/t1*100):0;
+  var growTxt=(grow>=0?'▲ naik ':'▼ turun ')+Math.abs(grow).toFixed(1)+'% dari '+ms[0]+' ke '+ms[2];
+
+  function ibar(label,val,max,color,cnt,onclick){
+    var pct=max>0?Math.max(2,val/max*100):0;
+    var lc=onclick?(' onclick="'+onclick+'"'):'';
+    return '<div class="ibar"><div class="ibar-l"'+lc+' title="'+(label+'').replace(/"/g,'')+'">'+label+'</div>'
+      +'<div class="ibar-t"><div class="ibar-f" style="width:'+pct.toFixed(1)+'%;background:'+color+'"></div></div>'
+      +'<div class="ibar-v">'+f(val)+'</div>'+(cnt!=null?'<div class="ibar-c">'+cnt+'</div>':'')+'</div>';
+  }
+  var H='';
+
+  /* 1. Hero KPI */
+  H+='<div class="ins-hero">'
+    +'<div class="ih r"><div class="ih-ic">💸</div><div class="ih-v" style="color:var(--re)">'+f(dBln*12)+'</div><div class="ih-l">Potensi pasar / tahun</div><div class="ih-s">Total denda kVArh '+A.length.toLocaleString()+' pelanggan ('+f(dBln)+'/bln)</div></div>'
+    +'<div class="ih o"><div class="ih-ic">🔥</div><div class="ih-v" style="color:var(--or)">'+f(d3)+'</div><div class="ih-l">Uang hangus '+ms[0]+'–'+ms[2]+'</div><div class="ih-s">Sudah terbuang sia-sia dalam 3 bulan terakhir</div></div>'
+    +'<div class="ih b"><div class="ih-ic">🏗️</div><div class="ih-v" style="color:var(--bl)">'+f(inv)+'</div><div class="ih-l">Nilai proyek (pipeline)</div><div class="ih-s">'+Math.round(kv).toLocaleString()+' kVAR kapasitor untuk dipasang</div></div>'
+    +'<div class="ih g"><div class="ih-ic">⚡</div><div class="ih-v" style="color:var(--gr)">'+qw.length.toLocaleString()+'</div><div class="ih-l">Quick-win (ROI ≤ 6 bln)</div><div class="ih-s">Balik modal kilat · denda '+f(qwD)+'/bln</div></div>'
+    +'<div class="ih p"><div class="ih-ic">🤝</div><div class="ih-v" style="color:#7c3aed">'+f(fee*12)+'</div><div class="ih-l">Potensi fee ENVISOR / tahun</div><div class="ih-s">Skema fee 10% dari denda yang dihemat</div></div>'
+    +'<div class="ih r"><div class="ih-ic">🔴</div><div class="ih-v" style="color:var(--re)">'+c3.toLocaleString()+'</div><div class="ih-l">Chronic 3 bulan berturut</div><div class="ih-s">Bukti masalah permanen — argumen jual terkuat</div></div>'
+    +'</div>';
+
+  /* 2. Trend 3 bulan */
+  var mx=Math.max(t1,t2,t3,1);var tv=[t1,t2,t3];
+  H+='<div class="ins-sec"><div class="ins-h">📈 Tren denda kVArh — momentum masalah</div>'
+    +'<div class="ins-sub">Denda total per bulan. Tren <b>'+growTxt+'</b> → '+(grow>=0?'masalah makin parah, urgensi makin tinggi untuk ditawari solusi.':'menurun, tetap ada potensi penghematan.')+'</div>'
+    +'<div class="mtrend">';
+  for(var i=0;i<3;i++){H+='<div class="mtb"><div class="mtb-v">'+f(tv[i])+'</div><div class="mtb-bar" style="height:'+(tv[i]/mx*100).toFixed(1)+'%"></div><div class="mtb-l">'+ms[i]+'</div></div>';}
+  H+='</div></div>';
+
+  /* 3. Payback bands */
+  var bands=[['ROI ≤ 6 bln (kilat)','#0ea572',function(r){return r<=6}],
+             ['7–12 bln','#2563eb',function(r){return r>6&&r<=12}],
+             ['13–24 bln','#f59e0b',function(r){return r>12&&r<=24}],
+             ['> 24 bln','#94a3b8',function(r){return r>24}]];
+  var bm=0,bd=bands.map(function(b){var g=A.filter(function(l){return b[2](l.roi_bulan)});var v=g.reduce(function(s,l){return s+l.denda_avg},0);if(v>bm)bm=v;return [b[0],b[1],g.length,v]});
+  var pb='';bd.forEach(function(b){pb+=ibar(b[0],b[3],bm,b[1],b[2]+' lead');});
+  H+='<div class="ins-sec"><div class="ins-h">⏱️ Kecepatan balik modal (payback)</div><div class="ins-sub">Prioritaskan band hijau & biru — paling mudah di-closing karena ROI cepat.</div>'+pb+'</div>';
+
+  /* 4. grid: tarif + UP3 */
+  var byT={},byU={};
+  A.forEach(function(l){
+    (byT[l.tarif]=byT[l.tarif]||{n:0,d:0}); byT[l.tarif].n++; byT[l.tarif].d+=l.denda_avg;
+    var k=l.up3_code+'|'+l.up3;(byU[k]=byU[k]||{n:0,d:0,code:l.up3_code,name:l.up3});byU[k].n++;byU[k].d+=l.denda_avg;
+  });
+  var tArr=Object.keys(byT).map(function(k){return [k,byT[k]]}).sort(function(a,b){return b[1].d-a[1].d}).slice(0,8);
+  var tMax=tArr.length?tArr[0][1].d:1;var tb='';
+  tArr.forEach(function(e){tb+=ibar(e[0]||'(lain)',e[1].d,tMax,'linear-gradient(90deg,#6366f1,#2563eb)',e[1].n+' lead',"insFilter('tarif','"+e[0]+"')");});
+  var uArr=Object.keys(byU).map(function(k){return byU[k]}).sort(function(a,b){return b.d-a.d}).slice(0,8);
+  var uMax=uArr.length?uArr[0].d:1;var ub='';
+  uArr.forEach(function(u){ub+=ibar(u.name,u.d,uMax,'linear-gradient(90deg,#0ea572,#10b981)',u.n+' lead',"insFilter('up3','"+u.code+"')");});
+  H+='<div class="ins-grid2">'
+    +'<div class="ins-sec"><div class="ins-h">🏭 Segmen tarif (denda/bln)</div><div class="ins-sub">Klik untuk filter. Fokus industri penyumbang denda terbesar.</div>'+tb+'</div>'
+    +'<div class="ins-sec"><div class="ins-h">📍 Wilayah peluang — Top UP3</div><div class="ins-sub">Klik untuk filter. Untuk perencanaan rute & target tim sales.</div>'+ub+'</div>'
+    +'</div>';
+
+  /* 5. grid: kVAR product mix + ringkasan prioritas */
+  var sz=[['≤ 50 kVAR (kecil)','#94a3b8',function(k){return k<=50}],
+          ['51–200 (sedang)','#2563eb',function(k){return k>50&&k<=200}],
+          ['201–500 (besar)','#f59e0b',function(k){return k>200&&k<=500}],
+          ['> 500 (sangat besar)','#dc2626',function(k){return k>500}]];
+  var szMax=0,szArr=sz.map(function(s){var g=A.filter(function(l){return s[2](l.kvar_rec)});var v=g.reduce(function(a,l){return a+l.kvar_rec},0);if(g.length>szMax)szMax=g.length;return [s[0],s[1],g.length,v]});
+  var sb='';szArr.forEach(function(s){var pct=szMax>0?Math.max(2,s[2]/szMax*100):0;sb+='<div class="ibar"><div class="ibar-l" title="'+s[0]+'">'+s[0]+'</div><div class="ibar-t"><div class="ibar-f" style="width:'+pct.toFixed(1)+'%;background:'+s[1]+'"></div></div><div class="ibar-v">'+s[2].toLocaleString()+' unit</div><div class="ibar-c">'+Math.round(s[3]).toLocaleString()+' kVAR</div></div>';});
+  var pr={URGENT:0,HIGH:0,MEDIUM:0,LOW:0};A.forEach(function(l){pr[l.priority]=(pr[l.priority]||0)+1});
+  var prRow=function(k,c){return '<div class="ibar"><div class="ibar-l">'+k+'</div><div class="ibar-t"><div class="ibar-f" style="width:'+Math.max(2,(pr[k]||0)/A.length*100).toFixed(1)+'%;background:'+c+'"></div></div><div class="ibar-v">'+(pr[k]||0).toLocaleString()+' lead</div><div class="ibar-c">'+((pr[k]||0)/A.length*100).toFixed(0)+'%</div></div>';};
+  H+='<div class="ins-grid2">'
+    +'<div class="ins-sec"><div class="ins-h">🔧 Mix produk (ukuran kapasitor)</div><div class="ins-sub">Untuk estimasi stok & paket penawaran.</div>'+sb+'</div>'
+    +'<div class="ins-sec"><div class="ins-h">🎯 Komposisi prioritas</div><div class="ins-sub">Sebaran lead per tingkat urgensi.</div>'+prRow('URGENT','#dc2626')+prRow('HIGH','#f59e0b')+prRow('MEDIUM','#2563eb')+prRow('LOW','#94a3b8')+'</div>'
+    +'</div>';
+
+  /* 6. Target lists */
+  function tgtTable(rows,title,sub,roiCol){
+    var h='<div class="ins-sec"><div class="ins-h">'+title+'</div><div class="ins-sub">'+sub+'</div>'
+      +'<div style="overflow-x:auto"><table class="tgt"><thead><tr><th>#</th><th>Pelanggan</th><th>UP3</th><th>Denda/bln</th><th>'+(roiCol?'ROI':'Rasio')+'</th><th>kVAR</th><th>Investasi</th><th></th></tr></thead><tbody>';
+    rows.forEach(function(l,i){
+      h+='<tr><td class="mo2" style="color:var(--t3)">'+(i+1)+'</td>'
+        +'<td class="nm" title="'+l.nama.replace(/"/g,'')+'">'+l.nama+' <span style="font-weight:500;color:var(--t3)">'+l.tarif+'</span></td>'
+        +'<td style="color:var(--t2)">'+l.up3+'</td>'
+        +'<td class="mo2" style="color:var(--re);font-weight:600">'+f(l.denda_avg)+'</td>'
+        +'<td class="mo2">'+(roiCol?(l.roi_bulan+' bln'):(l.rasio+'%'))+'</td>'
+        +'<td class="mo2">'+l.kvar_rec+'</td>'
+        +'<td class="mo2" style="color:var(--t2)">'+f(l.invest_est)+'</td>'
+        +'<td><button class="pitchbtn" onclick="copyPitch(\''+l.id+'\')">📋 Pitch</button></td></tr>';
+    });
+    return h+'</tbody></table></div></div>';
+  }
+  var quick=A.filter(function(l){return l.is_c3}).slice().sort(function(a,b){return a.roi_bulan-b.roi_bulan||b.denda_avg-a.denda_avg}).slice(0,12);
+  var bigt=A.slice().sort(function(a,b){return b.denda_avg-a.denda_avg}).slice(0,12);
+  H+=tgtTable(quick,'🥇 Daftar tembak — paling mudah closing','Chronic 3 bulan + ROI tercepat. Tekan “Pitch” untuk menyalin narasi penawaran siap kirim.',true);
+  H+=tgtTable(bigt,'💰 Tiket terbesar — denda/bulan tertinggi','Nilai kontrak terbesar. Cocok untuk pendekatan key-account.',false);
+
+  el.innerHTML=H;
+}
 
 /* ── ANALISIS ───────────────────────────────────────────────── */
 function renderA(){
