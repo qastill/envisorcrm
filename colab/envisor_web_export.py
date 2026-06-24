@@ -114,19 +114,65 @@ print("🗓️  3 bulan terbaru:", [f"{MONTHS_LONG[mo-1]} {y}" for (y, mo), _ in
 # ── 4. Baca kolom yang diperlukan saja ────────────────────────────────
 NEED = ['IDPEL','NAMA','ALAMAT','TARIF','DAYA','UNITAP','UNITUP',
         'NAMAGARDU','PEMKWH','RPKVARH','RPTAG','JAMNYALA']
-def _want(c): return str(c).strip().upper().replace(' ', '_') in NEED
-def norm(df): df.columns = [str(c).strip().upper().replace(' ', '_') for c in df.columns]; return df
+def norm(df):
+    df.columns = [str(c).strip().upper().replace(' ', '_') for c in df.columns]
+    return df
+
+def _sniff_sep(path):
+    """Tebak delimiter dari baris pertama (,/;/tab/|)."""
+    try:
+        with open(path, 'r', encoding='utf-8', errors='ignore') as fh:
+            line = fh.readline()
+        cand = {d: line.count(d) for d in [',', ';', '\t', '|']}
+        best = max(cand, key=cand.get)
+        return best if cand[best] > 0 else ','
+    except Exception:
+        return ','
 
 def read_needed(path):
-    if path.lower().endswith('.csv'):
-        try:
-            df = pd.read_csv(path, dtype=str, low_memory=False, on_bad_lines='skip', usecols=_want)
-        except Exception:
-            df = pd.read_csv(path, dtype=str, low_memory=False, on_bad_lines='skip',
-                             usecols=_want, encoding='latin1')
+    """Baca file -> hanya kolom NEED. Robust terhadap delimiter, encoding,
+    dan baris judul di atas header (coba header di baris 0/1/2)."""
+    is_csv = path.lower().endswith('.csv')
+    makers = []
+    if is_csv:
+        sep = _sniff_sep(path)
+        for enc in ('utf-8', 'latin1'):
+            makers.append(lambda hdr, enc=enc, sep=sep: pd.read_csv(
+                path, dtype=str, low_memory=False, on_bad_lines='skip',
+                sep=sep, encoding=enc, header=hdr))
+        # fallback terakhir: biarkan pandas menebak delimiter sendiri
+        makers.append(lambda hdr: pd.read_csv(
+            path, dtype=str, sep=None, engine='python',
+            on_bad_lines='skip', header=hdr))
     else:
-        df = pd.read_excel(path, dtype=str, usecols=_want)
-    return norm(df)
+        makers.append(lambda hdr: pd.read_excel(path, dtype=str, header=hdr))
+
+    df = None
+    for make in makers:
+        for hdr in (0, 1, 2):
+            try:
+                cand = norm(make(hdr))
+            except Exception:
+                continue
+            if 'IDPEL' in cand.columns:
+                df = cand
+                break
+        if df is not None:
+            break
+
+    fname = os.path.basename(path)
+    if df is None:
+        raise ValueError(f"❌ Kolom IDPEL tak ditemukan di '{fname}'. "
+                         f"Cek delimiter / format file.")
+    if 'RPKVARH' not in df.columns:
+        raise ValueError(f"❌ '{fname}' tidak punya kolom RPKVARH (denda kVArh). "
+                         f"Kolom terbaca: {list(df.columns)[:20]}. "
+                         f"Pastikan file OLAP lengkap (bukan ekspor 3-kolom).")
+    keep = [c for c in NEED if c in df.columns]
+    miss = [c for c in ('DAYA','TARIF','UNITUP','JAMNYALA') if c not in df.columns]
+    if miss:
+        print(f"   ⚠️ {fname}: kolom opsional hilang {miss}")
+    return df[keep].copy()
 
 def fix_idpel(x):
     x = str(x).strip()
