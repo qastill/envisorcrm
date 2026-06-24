@@ -45,6 +45,20 @@ Upload OLAP bulan baru ke Drive  →  Run-all notebook Colab  →  minta Claude 
 > ringkasnya. Edit CRM (stage, kontak, catatan) tersimpan di browser
 > (localStorage) per `id` pelanggan, jadi **tidak hilang** saat data di-refresh.
 
+## Tab 💡 Insight Jual
+
+Tab khusus untuk men-_drive_ penjualan, dihitung otomatis dari data yang sedang
+tampil (ikut filter aktif & bulan terbaru):
+
+- **KPI peluang**: potensi pasar/tahun, uang hangus 3 bulan, nilai proyek
+  (pipeline), total kVAR, potensi fee ENVISOR 10%/tahun, jumlah _chronic_ 3 bulan.
+- **Tren denda** 3 bulan + indikator naik/turun (argumen urgensi).
+- **Payback band** (ROI ≤6 / 7–12 / 13–24 / >24 bln) — fokus closing cepat.
+- **Segmen tarif** & **Top UP3** (klik untuk langsung memfilter dashboard).
+- **Mix produk** (ukuran kapasitor) & **komposisi prioritas**.
+- **Daftar tembak**: 12 paling mudah closing (chronic + ROI tercepat) dan 12
+  tiket terbesar, lengkap tombol **📋 Pitch** (menyalin narasi penawaran siap kirim).
+
 ## Rumus analisa (terverifikasi 1:1 dengan build awal)
 
 ```
