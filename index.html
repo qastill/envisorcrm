@@ -122,7 +122,7 @@ select.fb{appearance:none;padding-right:22px;background-image:url("data:image/sv
 .kbtn:hover{border-color:var(--bl);color:var(--bl);background:var(--ll)}
 .kbtn.gr{border-color:var(--gm);color:var(--gr)}
 .kemp{padding:20px;text-align:center;color:var(--t3);font-size:10px}
-.tw{background:var(--w);border:1.5px solid var(--bd);border-radius:var(--rl2);overflow:hidden;box-shadow:var(--sh)}
+.tw{background:var(--w);border:1.5px solid var(--bd);border-radius:var(--rl2);overflow:auto;max-height:calc(100vh - 250px);box-shadow:var(--sh)}
 table{width:100%;border-collapse:collapse;font-size:11px}
 thead th{background:var(--gl2);padding:9px 12px;text-align:left;font-size:10px;font-weight:800;color:var(--t2);border-bottom:1.5px solid var(--bd2);cursor:pointer;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
 thead th:hover{color:var(--bl)}
@@ -133,6 +133,14 @@ td.nm{color:var(--tx);font-weight:800;max-width:170px;overflow:hidden;text-overf
 td.dn{color:var(--rd);font-weight:700;font-family:var(--mo)}
 td.ri{color:var(--gr);font-weight:700;font-family:var(--mo)}
 td.mn{font-family:var(--mo);font-size:10px}
+.tw thead th{position:sticky;top:0;z-index:3;user-select:none}
+.tw thead th.th-active{background:#dbe4ff;color:var(--bl)}
+.tw thead th .sar{font-size:9px;margin-left:3px;opacity:.55}
+.tw thead th.th-active .sar{opacity:1;color:var(--bl)}
+.tw th.num{text-align:right}
+.tw td.mn,.tw td.dn{text-align:right}
+.tw tbody tr:nth-child(even){background:#fafbfe}
+.tw tbody tr:hover{background:var(--ll)}
 .m-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:2px}
 .an-hd{font-size:13px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:6px}
 .an-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
@@ -379,7 +387,7 @@ td.mn{font-family:var(--mo);font-size:10px}
     <option value="negosiasi">🤝 Negosiasi</option><option value="deal">✅ Deal</option>
     <option value="gugur">❌ Gugur</option>
   </select>
-  <select class="fb" id="fsort" onchange="applyF()">
+  <select class="fb" id="fsort" onchange="sK='_rank';applyF()">
     <option value="smart">🎯 Smart Sort</option>
     <option value="roi">⚡ ROI Tercepat</option>
     <option value="denda">💰 Denda Terbesar</option>
@@ -395,23 +403,23 @@ td.mn{font-family:var(--mo);font-size:10px}
 <div id="vt" style="display:none;padding:16px 20px">
   <div class="tw"><table>
     <thead><tr>
-      <th onclick="sT('_rank')">#</th>
-      <th onclick="sT('nama')">Perusahaan</th>
-      <th onclick="sT('up3_code')">UP3</th>
-      <th onclick="sT('ulp_num')">ULP</th>
-      <th onclick="sT('tarif')">Tarif</th>
-      <th onclick="sT('daya_va')" style="color:var(--bl)">⚡ Daya</th>
-      <th onclick="sT('jam_nyala')" style="color:#7c3aed">🕐 Jam Nyala</th>
-      <th onclick="sT('denda_jan')" style="color:#ef4444" id="th-m1">Jan</th>
-      <th onclick="sT('denda_feb')" style="color:#f59e0b" id="th-m2">Feb</th>
-      <th onclick="sT('denda_mar')" style="color:#2563eb" id="th-m3">Mar</th>
-      <th onclick="sT('denda_avg')">💰 Denda Avg</th>
-      <th onclick="sT('tagihan')">🧾 Tagihan/bln</th>
-      <th onclick="sT('rasio')">📊 Rasio</th>
-      <th onclick="sT('kvar_rec')">🔧 kVAR</th>
-      <th onclick="sT('roi_bulan')">Payback</th>
-      <th>Prioritas</th>
-      <th onclick="sT('stage')">Stage</th>
+      <th onclick="sT('_rank')" data-sk="_rank">#<span class="sar"></span></th>
+      <th onclick="sT('nama')" data-sk="nama">Perusahaan<span class="sar"></span></th>
+      <th onclick="sT('up3_code')" data-sk="up3_code">UP3<span class="sar"></span></th>
+      <th onclick="sT('ulp_num')" data-sk="ulp_num">ULP<span class="sar"></span></th>
+      <th onclick="sT('tarif')" data-sk="tarif">Tarif<span class="sar"></span></th>
+      <th onclick="sT('daya_va')" data-sk="daya_va" class="num" style="color:var(--bl)">⚡ Daya<span class="sar"></span></th>
+      <th onclick="sT('jam_nyala')" data-sk="jam_nyala" class="num" style="color:#7c3aed">🕐 Jam Nyala<span class="sar"></span></th>
+      <th onclick="sT('denda_jan')" data-sk="denda_jan" class="num" style="color:#ef4444" id="th-m1">Jan<span class="sar"></span></th>
+      <th onclick="sT('denda_feb')" data-sk="denda_feb" class="num" style="color:#f59e0b" id="th-m2">Feb<span class="sar"></span></th>
+      <th onclick="sT('denda_mar')" data-sk="denda_mar" class="num" style="color:#2563eb" id="th-m3">Mar<span class="sar"></span></th>
+      <th onclick="sT('denda_avg')" data-sk="denda_avg" class="num">💰 Denda Avg<span class="sar"></span></th>
+      <th onclick="sT('tagihan')" data-sk="tagihan" class="num">🧾 Tagihan/bln<span class="sar"></span></th>
+      <th onclick="sT('rasio')" data-sk="rasio" class="num">📊 Rasio<span class="sar"></span></th>
+      <th onclick="sT('kvar_rec')" data-sk="kvar_rec" class="num">🔧 kVAR<span class="sar"></span></th>
+      <th onclick="sT('roi_bulan')" data-sk="roi_bulan" class="num">Payback<span class="sar"></span></th>
+      <th onclick="sT('priority')" data-sk="priority">Prioritas<span class="sar"></span></th>
+      <th onclick="sT('stage')" data-sk="stage">Stage<span class="sar"></span></th>
       <th></th>
     </tr></thead>
     <tbody id="tb"></tbody>
@@ -440,7 +448,7 @@ const SC={prospek:'#64748b',kontak:'#2563eb',survey:'#7c3aed',proposal:'#f59e0b'
 const LS='envisor_v9';
 function moS(i){return (META.months_short&&META.months_short[i])||['Jan','Feb','Mar'][i];}
 function moL(i){return (META.months_long&&META.months_long[i])||['Januari','Februari','Maret'][i];}
-function applyMeta(){var lbl=META.period_label||(moS(0)+'\u00b7'+moS(1)+'\u00b7'+moS(2));document.title='Envisor CRM \u2014 '+lbl;var tg=document.getElementById('logo-tg');if(tg)tg.textContent='Pipeline kVArh \u00b7 '+lbl+' \u00b7 '+(META.n_up3||0)+' UP3 \u00b7 '+(META.n_ulp||0)+' ULP \u00b7 UID Jabar';['th-m1','th-m2','th-m3'].forEach(function(id,i){var e=document.getElementById(id);if(e)e.textContent=moS(i);});}
+function applyMeta(){var lbl=META.period_label||(moS(0)+'\u00b7'+moS(1)+'\u00b7'+moS(2));document.title='Envisor CRM \u2014 '+lbl;var tg=document.getElementById('logo-tg');if(tg)tg.textContent='Pipeline kVArh \u00b7 '+lbl+' \u00b7 '+(META.n_up3||0)+' UP3 \u00b7 '+(META.n_ulp||0)+' ULP \u00b7 UID Jabar';['th-m1','th-m2','th-m3'].forEach(function(id,i){var e=document.getElementById(id);if(e)e.innerHTML=moS(i)+'<span class="sar"></span>';});}
 
 /* ── Formatters ─────────────────────────────────────────────── */
 function f(n){
@@ -779,7 +787,7 @@ function renderB(){
 
 /* ── TABLE ──────────────────────────────────────────────────── */
 function renderT(){
-  var sorted=getS(filt);
+  var sorted=(sK&&sK!=='_rank')?sortT(filt):getS(filt);
   function mdot(v,clr){return v>0?'<span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:'+clr+';margin-right:3px;vertical-align:middle"></span>'+f(v):'<span style="color:var(--bd2)">—</span>'}
   function fkva(va){if(!va)return'—';if(va>=1e6)return(va/1e6).toFixed(1)+' MVA';if(va>=1e3)return(va/1e3).toFixed(0)+' kVA';return va+' VA'}
   var rows='';
@@ -808,9 +816,41 @@ function renderT(){
     +'</tr>';
   });
   document.getElementById('tb').innerHTML=rows;
+  setSortArrows();
 }
 
-function sT(k){if(sK===k)sD*=-1;else{sK=k;sD=1}renderT()}
+var TXT_SORT={nama:1,up3_code:1,ulp_num:1,tarif:1,stage:1};
+var SEV={URGENT:4,HIGH:3,MEDIUM:2,LOW:1};
+function sT(k){
+  if(sK===k)sD*=-1;
+  else{sK=k;sD=TXT_SORT[k]?1:-1;}   /* teks: A→Z; angka & prioritas: terbesar dulu */
+  renderT();
+}
+function valOf(l,k){
+  if(k==='priority')return SEV[l.priority]||0;
+  if(k==='stage')return STAGES.indexOf(l.stage);
+  return l[k];
+}
+function sortT(arr){
+  var k=sK,dir=sD;
+  return arr.slice().sort(function(a,b){
+    var av=valOf(a,k),bv=valOf(b,k);
+    if(typeof av==='string'||typeof bv==='string'){
+      av=(av==null?'':av).toString().toLowerCase();bv=(bv==null?'':bv).toString().toLowerCase();
+      return av<bv?-dir:av>bv?dir:0;
+    }
+    av=av==null?0:av;bv=bv==null?0:bv;
+    return (av-bv)*dir;
+  });
+}
+function setSortArrows(){
+  var ths=document.querySelectorAll('#vt thead th[data-sk]');
+  for(var i=0;i<ths.length;i++){
+    var th=ths[i],k=th.getAttribute('data-sk'),s=th.querySelector('.sar');
+    if(k===sK&&k!=='_rank'){th.classList.add('th-active');if(s)s.textContent=sD>0?'▲':'▼';}
+    else{th.classList.remove('th-active');if(s)s.textContent='';}
+  }
+}
 
 /* ── INSIGHT JUAL (sales intelligence) ──────────────────────── */
 function pitchText(l){
