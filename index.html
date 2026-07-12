@@ -315,6 +315,98 @@ td.mn{font-family:var(--mo);font-size:10px}
 .mtb-bar{width:100%;max-width:64px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#3b82f6,#1d4ed8);min-height:4px;transition:height .5s}
 .mtb-v{font-family:var(--mo);font-size:10px;font-weight:600;color:var(--bl)}
 .mtb-l{font-size:11px;font-weight:700;color:var(--t2)}
+
+/* ════════════════ MOBILE / RESPONSIVE (HP) ════════════════ */
+@media(max-width:760px){
+  html{-webkit-text-size-adjust:100%}
+  body{overflow-x:hidden}
+
+  /* Header */
+  .hdr{padding:0 12px;height:54px;gap:8px}
+  .logo{gap:8px;min-width:0}
+  .logo-ic{width:32px;height:32px;font-size:16px;border-radius:8px}
+  .logo-nm{font-size:14px}
+  .logo-tg{display:none}
+  .hstats{display:none}
+  .hright{gap:6px;flex-shrink:0}
+  .btn{padding:8px 11px;font-size:11px}
+
+  /* Tabs — keep horizontal scroll, snug to shorter header */
+  .tabs{top:54px;padding:0 8px;-webkit-overflow-scrolling:touch}
+  .tab{padding:10px 12px;font-size:12px}
+
+  /* Toolbar — search full width, filters 2-per-row */
+  .toolbar{padding:8px 12px;gap:6px}
+  .sbox{flex:1 1 100%;min-width:0;order:-2}
+  .fsep{display:none}
+  .toolbar>select.fb{flex:1 1 calc(50% - 3px);min-width:0!important;padding:9px 22px 9px 10px;font-size:13px}
+  .toolbar>button.fb{flex:0 0 auto;padding:9px 12px;font-size:13px}
+  .fcnt{flex:1 1 100%;text-align:right;margin-left:0;order:9}
+
+  /* Prevent iOS zoom-on-focus + bigger tap targets */
+  .sbox input,.fg input,.fg select,.fg textarea,.cr input,.ci-r input{font-size:16px}
+  .sbox input{padding:10px 12px 10px 32px}
+
+  /* Active-filter chips */
+  #af-bar{padding:6px 12px}
+
+  /* Card grid — single column */
+  #vk{grid-template-columns:1fr!important;padding:12px;gap:10px}
+
+  /* Kanban — narrower columns, comfy scroll */
+  #vb{padding:12px;-webkit-overflow-scrolling:touch}
+  .kc{min-width:78vw;width:78vw;max-width:300px}
+
+  /* Table — horizontal scroll, let height grow */
+  #vt{padding:12px!important}
+  .tw{max-height:none;-webkit-overflow-scrolling:touch}
+  thead th{padding:8px 9px}
+  tbody td{padding:7px 9px}
+
+  /* Stat / KPI grids — 2-up tiles instead of 1 huge tile */
+  #vs{grid-template-columns:1fr 1fr!important;padding:12px!important;gap:10px}
+  .an-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .ins-hero{grid-template-columns:1fr 1fr;gap:8px}
+  .ae-hero{grid-template-columns:1fr 1fr;gap:8px}
+  .ae-grid{grid-template-columns:1fr}
+  .ins-grid2{grid-template-columns:1fr}
+  .trend-row{grid-template-columns:1fr}
+  #va,#vi,#vae{padding:12px}
+  .ih-v,.sc-v,.an-v{font-size:18px}
+  .ae-h .v{font-size:16px}
+  .sc.wide,.ih,.sc,.an-card{padding:12px}
+
+  /* Bar charts — give the bar more room */
+  .blbl{min-width:92px;font-size:9px}
+  .bval{min-width:56px;font-size:9px}
+  .ibar-l{width:80px;font-size:10px}
+  .ibar-v{width:88px;font-size:10px}
+  .ibar-c{display:none}
+
+  /* Detail modal — bottom-sheet style */
+  .ov{padding:0;align-items:flex-end}
+  .modal{max-width:100%;max-height:94vh;border-radius:18px 18px 0 0}
+  .mh{padding:14px 16px}
+  .mt{font-size:14px}
+  .mb{padding:14px 16px;gap:12px}
+  .mf{padding:12px 16px}
+  .mgrid{grid-template-columns:1fr}
+  #cb-res{grid-template-columns:1fr 1fr!important}
+  .cr-box{padding:8px}
+  .sopt{padding:7px 11px;font-size:11px}
+
+  /* Toast clears the bottom-sheet edge */
+  .toast{left:12px;right:12px;bottom:12px;text-align:center}
+}
+
+/* Extra-narrow phones */
+@media(max-width:380px){
+  .logo-nm{font-size:13px}
+  .btn{padding:7px 9px;font-size:10px}
+  .tab{padding:9px 10px}
+  #vs{grid-template-columns:1fr!important}
+  .an-grid,.ins-hero,.ae-hero{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
